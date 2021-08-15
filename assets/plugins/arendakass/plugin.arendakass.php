@@ -2,10 +2,10 @@
 if ($modx->event->name !== 'OnOrderPaid' || !isset($token) || !$fully_paid) return;
 $processor = $modx->commerce->loadProcessor();
 $cart = $processor->getCart();
-$payment = new \Commerce\Payments\Payment($modx);
-$method = new ReflectionMethod($payment, 'prepareItems');
+$_payment = new \Commerce\Payments\Payment($modx);
+$method = new ReflectionMethod($_payment, 'prepareItems');
 $method->setAccessible(true);
-$items = $method->invoke($payment, $cart);
+$items = $method->invoke($_payment, $cart);
 $docItems = [];
 foreach ($items as $item) {
     $docItems[] = [
